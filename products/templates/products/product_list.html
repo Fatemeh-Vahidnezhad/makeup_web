@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آرایشی</title>
+
+    <!-- Persian Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Vazir", sans-serif;
+            background: #faf7f7;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ffffff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-weight: 600;
+            color: #d63384;
+            font-size: 24px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            margin-right: 20px;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        /* Category Filter Bar */
+        .category-bar a {
+            padding: 10px 18px;
+            margin: 6px;
+            background: #eee;
+            color: #555;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .category-bar a.active {
+            background: #d63384;
+            color: #fff;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 35px;
+        }
+
+        /* Product Card */
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .category {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 19px;
+            color: #d63384;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h2>فروشگاه آرایشی</h2>
+        <div>
+            <a href="/">خانه</a>
+            <a href="#">محصولات</a>
+            <a href="#">تماس با ما</a>
+        </div>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="category-bar" style="text-align:center; margin: 20px 0;">
+        {% for value, label in categories %}
+            <a href="/?category={{ value }}"
+               class="{% if selected_category == value %}active{% endif %}">
+                {{ label }}
+            </a>
+        {% endfor %}
+
+        <!-- Show All -->
+        <a href="/" class="{% if not selected_category %}active{% endif %}">
+            همه محصولات
+        </a>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <h1 style="text-align:center; color:#333; margin-bottom:40px;">لیست محصولات</h1>
+
+        <div class="grid">
+            {% for p in products %}
+            <div class="card">
+                <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                <div class="card-body">
+                    <div class="name">{{ p.name }}</div>
+                    <div class="category">{{ p.category }}</div>
+                    <div class="price">{{ p.price }} تومان</div>
+                    <p class="description">{{ p.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
