@@ -40,7 +40,18 @@ TEMPLATES = [{
 
 WSGI_APPLICATION = 'makeupshop.wsgi.application'
 
-DATABASES={'default':{'ENGINE':'django.db.backends.sqlite3','NAME': BASE_DIR/'db.sqlite3'}}
+DATABASES = {
+  "default": {
+    "ENGINE": "django.db.backends.mysql",
+    "NAME": "celeir_database",
+    "USER": "celeir_ashkan",
+    "PASSWORD": "Ashkan1371@@_",
+    "HOST": "localhost",
+    "PORT": "3306",
+    "OPTIONS": {"charset": "utf8mb4"},
+  }
+}
+
 
 LANGUAGE_CODE='en-us'
 TIME_ZONE='UTC'
